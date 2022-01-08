@@ -1,0 +1,39 @@
+spring:
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: ${JWT_ISSUER_URI:https://common-w1-keycloak.hprd.caas.caa.group.gca/auth/realms/VL}
+
+logging:
+  level:
+    org.springframework: ${LOG_LEVEL_SPRING:INFO}
+    com.caa: ${LOG_LEVEL_CAAS:DEBUG}
+
+application:
+  security:
+    cors:
+      allowedOrigins: ${CORS_ALLOWED_ORIGINS:*}
+      allowedMethods: ${CORS_ALLOWED_METHODS:GET,OPTIONS}
+
+  featureFlipping:
+    client: ${FEATURE_FLIPPING_CLIENT:veex:dev:client}
+
+izanami:
+  host: ${IZANAMI_URL:https://version-ci-f5-izanami.predica-hprd.caas.caa.group.gca}
+  client-id: ${IZANAMI_CLIENT_ID:jcnouz4z26crcbc8}
+  client-secret: ${IZANAMI_CLIENT_SECRET:pww7honcoqgpj7bx4lzrbwzy0r97q1rguuu1mma1x6yd386po5wpk3z2o8pfxde3}
+  config:
+    strategy:
+      type: DevStrategy
+  experiment:
+    strategy:
+      type: DevStrategy
+  feature:
+    strategy:
+      type: DevStrategy
+    fallback: >
+      [
+        { "id": "veex:dev:client", "enabled": true }
+      ]
+    autocreate: true

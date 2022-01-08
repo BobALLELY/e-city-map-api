@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: "e-city-api"
+  profiles:
+    # The commented value for `active` can be replaced with valid Spring profiles to load.
+    # Otherwise, it will be filled in by maven when building the JAR file
+    # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+    active: @spring.profiles.active@
+
+logging:
+  pattern:
+    console: "time=%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}|level=%highlight(%-5level)|usr_id=%X{usr_id}|app_id=CC-API|corr_id=%X{corr_id}|sess_id=%X{sess_id}|component_id=%logger{36}.%M:%L|message=%msg%n%throwable"
+  level:
+    org.zalando.logbook: TRACE
+
+application:
+  applicationCode: SC-Case-API
+  apiName: space-crime
+  apiVersion: v1
+  isProd: ${IS_PROD:false}
+  security:
+    claims:
+      userId: ${CLAIM_USER_ID:user_id}
+      userUomCode: ${CLAIM_USER_UOM_CODE:user_uom_code}
+      userAgencyCode: ${CLAIM_USER_AGENCY_CODE:user_agency_code}
+      userProfile: ${CLAIM_USER_PROFILE:user_profile}
+      userType: ${CLAIM_USER_TYPE:user_type}
+      deliveryChannel: ${CLAIM_DELIVER_CHANNEL:delivery_channel}
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+
+# https://blog.ippon.fr/2020/12/07/implementation-logbook-tracer-les-appels-http-api-rest-spring-boot/
+logbook:
+  include: ['**/crime-city/**', '**/manage/**']
+  filter.enabled: true
+  secure-filter.enabled: true
+  format.style: json
+  strategy: default
+  obfuscate:
+    headers: ['obfuscate']
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      path-mapping:
+        health: /health/check
+        info: /info
+      exposure:
+        include: ['health', 'info']
+  endpoint:
+    health:
+      show-details: when-authorized
+      roles: ADMIN
+  info:
+    git:
+      mode: full

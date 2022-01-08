@@ -1,0 +1,31 @@
+{
+  "version": "0.0.1" ,
+  "hash": "" ,
+  "mapImageUrl": "",
+  "atlasImageUrl": "",
+  "atlas": [
+    {
+      "x":1972,
+      "y":1255,
+      "w":212,
+      "h":131,
+      "key":"E1"
+    }
+  ],
+  "items": [
+    {
+      "x":0,
+      "y":0
+    }
+  ],
+  "sectors": [
+    {
+      "x":0,
+      "y":0,
+      "w":500,
+      "h":500,
+      "fr_label":"Les 2 statues",
+      "en_label":"The 2 statues"
+    }
+  ]
+}
