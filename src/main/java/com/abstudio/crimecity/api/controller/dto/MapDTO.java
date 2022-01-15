@@ -19,10 +19,6 @@ public class MapDTO {
     // Fond de la carte
     @JsonProperty("map_image_url")
     String mapImageUrl;
-
-    // Image à découper pour positionner les éléments
-    @JsonProperty("atlas_image_url")
-    String atlasImageUrl;
     @JsonProperty("atlas")
     List<AtlasDTO> atlas;
     @JsonProperty("sectors")

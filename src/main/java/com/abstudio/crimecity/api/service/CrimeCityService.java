@@ -3,6 +3,7 @@ package com.abstudio.crimecity.api.service;
 import com.abstudio.crimecity.api.exception.FeatureNotAvailableException;
 import com.abstudio.crimecity.api.exception.NotFoundException;
 import com.abstudio.crimecity.api.exception.TechnicalException;
+import com.abstudio.crimecity.api.model.AtlasFile;
 import com.abstudio.crimecity.api.model.Case;
 import com.abstudio.crimecity.api.model.Map;
 import com.abstudio.crimecity.api.service.izanami.IIzanamiService;
@@ -46,14 +47,26 @@ public class CrimeCityService extends ACrimeCityService {
             }
             ObjectMapper objectMapper = new ObjectMapper();
             ClassPathResource resource = new ClassPathResource("/maps/" + extensionUUID + "/extension.json");
-            //read json file and convert to customer object
-            Map map = objectMapper.readValue(resource.getFile(), Map.class);
-            List<File> files = this.getAllCasesConfigurationFiles(extensionUUID);
-            files.stream().forEach(f -> {
+            // on ajoute les ressources de l'extension
+            Map map = objectMapper.readValue(resource.getInputStream(), Map.class);
+            map.setExtensionUUID(extensionUUID);
+
+            // on ajoute toutes les ressources des enquêtes
+            map.getCaseFiles().stream().forEach(caseFile -> {
                 try {
-                    Case c = objectMapper.readValue(f, Case.class);
-                    map.getAtlas().addAll(c.getAtlas());
+                    ClassPathResource resourceCaseFile = new ClassPathResource("/maps/" + extensionUUID + "/cases/" + caseFile);
+                    Case c = objectMapper.readValue(resourceCaseFile.getInputStream(), Case.class);
                     map.getItems().addAll(c.getItems());
+                } catch (IOException e) {
+                    CrimeCityService.log.error(LOG_FORBIDDEN_PARAMS, CrimeCityService.LOG_PREFIX, e.getLocalizedMessage());
+                }
+            });
+            // on ajoute tous les atlas
+            map.getAtlasFiles().stream().forEach(atlasFile -> {
+                try {
+                    ClassPathResource resourceCaseFile = new ClassPathResource("/maps/" + extensionUUID + "/" + atlasFile);
+                    AtlasFile file = objectMapper.readValue(resourceCaseFile.getInputStream(), AtlasFile.class);
+                    map.getAtlas().addAll(file.getSpriteSheets());
                 } catch (IOException e) {
                     CrimeCityService.log.error(LOG_FORBIDDEN_PARAMS, CrimeCityService.LOG_PREFIX, e.getLocalizedMessage());
                 }
@@ -74,16 +87,6 @@ public class CrimeCityService extends ACrimeCityService {
             CrimeCityService.log.warn(LOG_GLOBAL_WARN, CrimeCityService.LOG_PREFIX, e.getLocalizedMessage());
             throw new TechnicalException(e.getLocalizedMessage(), e);
         }
-    }
-
-    /**
-     * Retourne tous les fichiers de configuration des enquêtes d'une extension
-     * @param extensionUUID
-     * @return
-     */
-    private List<File> getAllCasesConfigurationFiles(String extensionUUID) throws IOException {
-        ClassPathResource casesDirectory = new ClassPathResource("/maps/" + extensionUUID + "/cases");
-        return Arrays.stream(casesDirectory.getFile().listFiles()).collect(Collectors.toList());
     }
 
     private boolean isUUID(String string) {

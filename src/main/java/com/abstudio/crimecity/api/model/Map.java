@@ -16,6 +16,8 @@ public class Map {
     String version;
     String mapImageUrl;
     String atlasImageUrl;
+    List<String> caseFiles;
+    List<String> atlasFiles;
     List<Atlas> atlas;
     List<Sector> sectors;
     List<Item> items;

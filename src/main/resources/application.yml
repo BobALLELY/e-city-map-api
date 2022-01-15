@@ -9,7 +9,7 @@ spring:
 
 logging:
   pattern:
-    console: "time=%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}|level=%highlight(%-5level)|usr_id=%X{usr_id}|app_id=CC-API|corr_id=%X{corr_id}|sess_id=%X{sess_id}|component_id=%logger{36}.%M:%L|message=%msg%n%throwable"
+    console: "time=%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}|level=%highlight(%-5level)|usr_id=%X{usr_id}|app_id=Space-Crime-Map-API|corr_id=%X{corr_id}|sess_id=%X{sess_id}|component_id=%logger{36}.%M:%L|message=%msg%n%throwable"
   level:
     org.zalando.logbook: TRACE
 

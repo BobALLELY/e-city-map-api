@@ -39,3 +39,7 @@ To compile the application in Production/K8S mode :\
 **To speed-up repeated analysis of the same codebase set the withHistory parameter to true.**\
 `mvn clean -DwithHistory test  -Pdev,pitest`\
 The mutation testing report in HTML are stored in target/pit-reports folder.\
+
+# Docker
+
+docker run -p8080:8080 --rm -it  space-crime-map-api:latest

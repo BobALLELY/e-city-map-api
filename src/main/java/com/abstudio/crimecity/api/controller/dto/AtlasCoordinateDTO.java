@@ -5,14 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class AtlasDTO {
-    @JsonProperty("image_url")
-    String imageUrl;
-    @JsonProperty("coordinates")
-    List<AtlasCoordinateDTO> coordinates;
+public class AtlasCoordinateDTO {
+    @JsonProperty("key")
+    String key;
+    @JsonProperty("x")
+    int x;
+    @JsonProperty("y")
+    int y;
+    @JsonProperty("h")
+    int h;
+    @JsonProperty("w")
+    int w;
 }

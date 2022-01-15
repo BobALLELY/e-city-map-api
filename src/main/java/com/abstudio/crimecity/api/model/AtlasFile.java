@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Atlas {
-    String imageUrl;
-    List<AtlasCoordinate> coordinates;
+public class AtlasFile {
+    List<Atlas> spriteSheets;
 }

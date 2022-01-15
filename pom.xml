@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.caa.digitalfactory</groupId>
     <artifactId>space-crime-map-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>space-crime-map-api</name>
     <description>Space Crime - Game API</description>
     <properties>
@@ -51,7 +51,7 @@
         </sonar.jacoco.itReportPath>
         <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
 
-        <start-class>com.abstudio.crimecity.api.VeexApplication</start-class>
+        <start-class>com.abstudio.crimecity.api.CrimeCityApplication</start-class>
     </properties>
     <dependencies>
         <dependency>

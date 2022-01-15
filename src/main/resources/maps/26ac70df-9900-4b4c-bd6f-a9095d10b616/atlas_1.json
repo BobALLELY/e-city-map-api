@@ -1,0 +1,23 @@
+{
+  "spriteSheets": [
+    {
+      "imageUrl": "https://dev-space-crime.s3.eu-west-3.amazonaws.com/extensions/1_26ac70df-9900-4b4c-bd6f-a9095d10b616/atlas/atlas_1.png",
+      "coordinates" : [
+        {
+          "x":1,
+          "y":1,
+          "w":50,
+          "h":50,
+          "key":"C1_Q1"
+        },
+        {
+          "x":1972,
+          "y":1255,
+          "w":212,
+          "h":131,
+          "key":"C1_Q2"
+        }
+      ]
+    }
+  ]
+}
